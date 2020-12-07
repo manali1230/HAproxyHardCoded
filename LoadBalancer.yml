@@ -1,0 +1,49 @@
+- hosts: Proxy
+  tasks:
+  - package:
+      name: "haproxy"
+      state: present
+
+  - copy:
+      dest: "/etc/haproxy/haproxy.cfg"
+      src: "haproxy.cfg"
+
+  - service:
+      name: "haproxy"
+      state: restarted
+
+  - name: SELinux in permissive mode.
+    ansible.posix.selinux:
+      policy: targeted
+      state: permissive
+
+  - service:
+      name: "firewalld"
+      state: stopped
+           
+
+- hosts: Webserver
+  tasks:
+  - package:
+      name:
+      - "httpd"
+      - "php"
+      - "net-tools"
+      state: present
+
+  - template:
+      dest: "/var/www/html/index.php"
+      src: "index.php"
+
+  - service:
+     name: "httpd"
+     state: restarted
+
+  - name: SELinux in permissive mode.
+    ansible.posix.selinux:
+      policy: targeted
+      state: permissive
+
+ 
+  
+   
