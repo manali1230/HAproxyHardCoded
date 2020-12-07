@@ -1,0 +1,8 @@
+[Proxy]
+192.168.43.127 ansible_user=root ansible_ssh_pass=**** ansible_connection=ssh
+
+[Webserver]
+192.168.43.193 ansible_user=root ansible_ssh_pass=**** ansible_connection=ssh
+192.168.43.135 ansible_user=root ansible_ssh_pass=**** ansible_connection=ssh
+
+
